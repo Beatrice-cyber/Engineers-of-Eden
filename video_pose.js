@@ -16,18 +16,18 @@ function setup() {
 
   text("Click on the buttons below to" + " play/pause the video", 20, 20);
   video = createVideo("short_clip.mp4");
-  // video.hide();
+  video.hide();
 
   // the createCapture() function creates an HTML video tag
   // as well as pulls up image to be used in p5 canvas
   // hide() function hides the HTML video element
-  playBtn = createButton("Play Video");
-  playBtn.position(10, 10);
-  playBtn.mouseClicked(playVideo);
+  // playBtn = createButton("Play Video");
+  // playBtn.position(10, 10);
+  // playBtn.mouseClicked(playVideo);
 
-  pauseBtn = createButton("Pause Video");
-  pauseBtn.position(30, 30);
-  pauseBtn.mouseClicked(pauseVideo);
+  // pauseBtn = createButton("Pause Video");
+  // pauseBtn.position(30, 30);
+  // pauseBtn.mouseClicked(pauseVideo);
   poseNet = ml5.poseNet(video, modelLoaded);
   poseNet.on("pose", gotPoses);
 }
