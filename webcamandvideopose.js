@@ -19,7 +19,7 @@ function pauseVideo() {
 function setup() {
   text("Click on the buttons below to" + " play/pause the video", 20, 20);
   noCanvas();
-  video = createVideo("clip.mp4");
+  video = createVideo("crisscrossdance.mp4");
   video.size(680);
 
   // the createCapture() function creates an HTML video tag
