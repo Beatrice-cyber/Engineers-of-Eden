@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection"></script> -->
+        <title>Webcam test</title>
+    </head>
+    <body>
+        WORK PLS
+        <div>
+            <video id="video" width="640" height="640" autoplay playsinline style="-moz-o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1);"></video>
+        </div>
+        One 
+        <script>
+            // tf.tensor([[1, 2], [3, 4]]).print();
+
+            
+            // Load camera
+            async function setupCamera() {
+                if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                throw new Error(
+                    'Browser API navigator.mediaDevices.getUserMedia not available');
+                }
+            }
+            
+            const video = document.getElementById('video');
+            // const stream = await navigator.mediaDevices.getUserMedia({
+            //   'audio': false,
+            //   'video': true,
+            // });
+
+            async function getMedia(constraints) {
+            let stream = null;
+                try {
+                    stream = await navigator.mediaDevices.getUserMedia(constraints);
+                    /* use the stream */
+                } catch (err) {
+                    /* handle the error */
+                    console.error("JS error for media devices")
+                }
+            }
+            video.srcObject = stream;
+
+            return new Promise((resolve) => {
+                video.onloadedmetadata = () => {
+                  resolve(video);
+                };
+            });
+
+            async function loadVideo() {
+                const video = await setupCamera();
+                video.play();
+              
+                return video;
+            }
+
+            async function detect() {
+
+                let video;
+                video = await loadVideo();
+          
+                let net;
+                // Load posenet
+                net = await posenet.load();
+          
+                flipHorizontal = true;
+          
+                // Scale the image. The smaller the faster
+                const imageScaleFactor = 0.75;
+          
+                // Stride, the larger, the smaller the output, the faster
+                const outputStride = 32;
+          
+                // Store all the poses
+                let poses = [];
+                let minPoseConfidence;
+                let minPartConfidence;
+          
+                const pose = await net.estimateSinglePose(video,
+                  imageScaleFactor,
+                  flipHorizontal,
+                  outputStride);
+                 console.log(pose);
+            }
+              
+          
+            detect(); 
+              
+        </script>
+        Get here
+    </body>
+</html>
+
