@@ -3,16 +3,32 @@ let poseNet;
 let pose;
 let skeleton;
 
+function playVideo() {
+  video.play();
+}
+
+function pauseVideo() {
+  video.pause();
+}
+
 function setup() {
-  createCanvas(680, 480);
-  video = createCapture(VIDEO);
+  text("Click on the buttons below to" + " play/pause the video", 20, 20);
+  noCanvas();
+  video = createVideo("clip.mp4");
+  video.size(680);
+
   // the createCapture() function creates an HTML video tag
   // as well as pulls up image to be used in p5 canvas
   // hide() function hides the HTML video element
-  video.size(width, height);
-  video.hide();
+  playBtn = createButton("Play Video");
+  playBtn.position(10, 10);
+  playBtn.mouseClicked(playVideo);
+
+  pauseBtn = createButton("Pause Video");
+  pauseBtn.position(30, 30);
+  pauseBtn.mouseClicked(pauseVideo);
   poseNet = ml5.poseNet(video, modelLoaded);
-  poseNet.on('pose', gotPoses);
+  poseNet.on("pose", gotPoses);
 }
 
 function gotPoses(poses) {
@@ -24,7 +40,7 @@ function gotPoses(poses) {
 }
 
 function modelLoaded() {
-  console.log('PoseNet Ready');
+  console.log("PoseNet Ready");
 }
 
 function drawDistFromCam(pose) {
@@ -45,7 +61,6 @@ function drawKeyPoints(pose) {
     ellipse(x, y, 8, 8);
   }
 }
-
 
 function drawSkeleton(skeleton) {
   for (let i = 0; i < skeleton.length; i++) {
