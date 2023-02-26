@@ -1,17 +1,13 @@
 
 //Add below to html file
 //<img id="exampleImg" width="640" height="360" crossorigin src="https://storage.googleapis.com/jmstore/TensorFlowJS/EdX/standing.jpg" />
-//  
-//<!-- Import TensorFlow.js library -->
-//<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.11.0/dist/tf.min.js" type="text/javascript"></script>
-//<!-- Import the page's JavaScript to do some stuff -->
-//<script src="script.js"></script>
 
 const MODEL_PATH = "https://tfhub.dev/google/tfjs-model/movenet/singlepose/lightning/4";
 const EXAMPLE_IMG = document.getElementById('exampleImg');
 
 let movenet = undefined;
 
+   
 async function loadAndRunModel() {
 
     movenet = await tf.loadGraphModel(MODEL_PATH, {fromTFHub: true});
