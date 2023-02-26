@@ -3,6 +3,11 @@ let poseNet;
 let pose;
 let skeleton;
 
+let webcamvideo;
+let camPoseNet;
+let campose;
+let camskeleton;
+
 function playVideo() {
   video.play();
 }
@@ -29,17 +34,41 @@ function setup() {
   pauseBtn.mouseClicked(pauseVideo);
   poseNet = ml5.poseNet(video, modelLoaded);
   poseNet.on("pose", gotPoses);
+//   console.log("video pose");
+
+  createCanvas(680, 480);
+  webcamvideo = createCapture(VIDEO);
+  // the createCapture() function creates an HTML video tag
+  // as well as pulls up image to be used in p5 canvas
+  // hide() function hides the HTML video element
+  webcamvideo.size(width, height);
+  webcamvideo.hide();
+  camPoseNet = ml5.poseNet(webcamvideo, modelLoaded);
+  camPoseNet.on('pose', gotWebcamPoses);
+  console.log("end of ");
 }
 
 function gotPoses(poses) {
   // console.log(poses);
   console.log("video poses");
-  analyse(poses);
+  videoPoses = poses;
+//   analyse(poses);
   if (poses.length > 0) {
     pose = poses[0].pose;
     skeleton = poses[0].skeleton;
   }
 }
+
+function gotWebcamPoses(poses) {
+    // console.log(poses);
+    console.log("webcam poses");
+    webcamPoses = poses;
+    analyse();
+    if (poses.length > 0) {
+      pose = poses[0].pose;
+      skeleton = poses[0].skeleton;
+    }
+  }
 
 function modelLoaded() {
   console.log("PoseNet Ready");
@@ -76,9 +105,9 @@ function drawSkeleton(skeleton) {
 
 function draw() {
   // move image by the width of image to the left
-  translate(video.width, 0);
+//   translate(video.width, 0);
   // then scale it by -1 in the x-axis to flip the image
-  scale(-1, 1);
+//   scale(-1, 1);
   // draw video capture feed as image inside p5 canvas
   image(video, 0, 0);
   if (pose) {
@@ -87,4 +116,18 @@ function draw() {
     drawSkeleton(skeleton);
     drawKeyPoints(pose);
   }
+
+  // move image by the width of image to the left
+  translate(webcamvideo.width, 0);
+  // then scale it by -1 in the x-axis to flip the image
+  scale(-1, 1);
+  // draw video capture feed as image inside p5 canvas
+  image(webcamvideo, 0, 0);
+  if (campose) {
+    // drawBodyParts(campose);
+    // drawDistFromCam(campose);
+    drawSkeleton(camskeleton);
+    drawKeyPoints(campose);
+  }
 }
+

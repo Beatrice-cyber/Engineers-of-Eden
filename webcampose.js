@@ -1,25 +1,27 @@
-let video;
-let poseNet;
-let pose;
-let skeleton;
+let webcamvideo;
+let camPoseNet;
+let campose;
+let camskeleton;
 
 function setup() {
   createCanvas(680, 480);
-  video = createCapture(VIDEO);
+  webcamvideo = createCapture(VIDEO);
   // the createCapture() function creates an HTML video tag
   // as well as pulls up image to be used in p5 canvas
   // hide() function hides the HTML video element
-  video.size(width, height);
-  video.hide();
-  poseNet = ml5.poseNet(video, modelLoaded);
-  poseNet.on('pose', gotPoses);
+  webcamvideo.size(width, height);
+  webcamvideo.hide();
+  camPoseNet = ml5.poseNet(webcamvideo, modelLoaded);
+  camPoseNet.on('pose', gotPoses);
 }
 
 function gotPoses(poses) {
-  console.log(poses);
+  // console.log(poses);
+  console.log("webcam poses")
+  analyse(poses);
   if (poses.length > 0) {
-    pose = poses[0].pose;
-    skeleton = poses[0].skeleton;
+    campose = poses[0].pose;
+    camskeleton = poses[0].skeleton;
   }
 }
 
@@ -59,15 +61,15 @@ function drawSkeleton(skeleton) {
 
 function draw() {
   // move image by the width of image to the left
-  translate(video.width, 0);
+  translate(webcamvideo.width, 0);
   // then scale it by -1 in the x-axis to flip the image
   scale(-1, 1);
   // draw video capture feed as image inside p5 canvas
-  image(video, 0, 0);
-  if (pose) {
-    // drawBodyParts(pose);
-    // drawDistFromCam(pose);
-    drawSkeleton(skeleton);
-    drawKeyPoints(pose);
+  image(webcamvideo, 0, 0);
+  if (campose) {
+    // drawBodyParts(campose);
+    // drawDistFromCam(campose);
+    drawSkeleton(camskeleton);
+    drawKeyPoints(campose);
   }
 }
