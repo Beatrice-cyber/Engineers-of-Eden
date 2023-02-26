@@ -20,5 +20,8 @@
   "dependencies": {
     "@tensorflow/tfjs": "^4.2.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "eslint": "^8.35.0",
+    "eslint-config-google": "^0.14.0"
+  }
 }
