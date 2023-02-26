@@ -12,10 +12,11 @@ function pauseVideo() {
 }
 
 function setup() {
+  createCanvas(800, 800);
+
   text("Click on the buttons below to" + " play/pause the video", 20, 20);
-  noCanvas();
-  video = createVideo("clip.mp4");
-  video.size(680);
+  video = createVideo("short_clip.mp4");
+  // video.hide();
 
   // the createCapture() function creates an HTML video tag
   // as well as pulls up image to be used in p5 canvas
