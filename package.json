@@ -1,0 +1,23 @@
+{
+  "name": "brishack",
+  "version": "1.0.0",
+  "description": "Bris hack project",
+  "main": "Main.js",
+  "scripts": {
+    "start":"Main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Beatrice-cyber/Engineers-of-Eden.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Beatrice-cyber/Engineers-of-Eden/issues"
+  },
+  "homepage": "https://github.com/Beatrice-cyber/Engineers-of-Eden#readme",
+  "dependencies": {
+    "@tensorflow/tfjs": "^4.2.0"
+  }
+}
