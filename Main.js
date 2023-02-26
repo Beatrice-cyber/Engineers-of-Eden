@@ -27,8 +27,12 @@ class AI{
         model.fit(xs, ys, {
             // traning for how many times 
             epochs: 100,
-            batchSize: 10,
-            shuffle: true,
+            // batchSize: 10,
+            // shuffle: true,
+        }).then((result) => {
+            const data = tf.tensor2d([0.1,1.0,1.5])
+            const prediction = model.predict(data);
+            prediction.print();
         });
     }
 }
