@@ -3,15 +3,50 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Flow dance</title>
-    <link rel="stylesheet" href="base.css" />
-  </head>
+    <link rel="stylesheet" href="base.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Engineers of Eden</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 
+  </head>
+  <section class=".container">
   <body>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/ml5@0.12.2/dist/ml5.min.js"></script>
-    <script src="video_pose.js"></script>
+    <section class="section">
+      <div class="container">
+        <h1 class="title">
+         Engineers of Eden: Dance to get in shape! 
+        </h1>
+        <p class="subtitle">
+          We are a group of students care of health of people by using a ML model to compare dancing positions with a youtube video.
+      </p>
+      </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/ml5@0.12.2/dist/ml5.min.js"></script>
+      <script src="pose.js"></script>
+      <!-- <script src="videoProcess.js"></script> -->
+      <script src="webcampose.js"></script>
+  
+      <br/>
+    <form>
+      <input class="input is-rounded" type="text" placeholder="Please input the Youtube link"> 
+    </form>
+    <button type="button" class="button is-success" onclick="showVideo()"> Use this Youtube link !
+    </button>
+    <br> 
+    <video id="myVid" width="600" height="400">
+     <source src="AriDance.mp4" type="video/mp4">
+      Sorry, your browser does not support HTML5 video.
+    </video>
+    <br>
+    <button onclick="playVideo()" type="button" class="button is-primary">Play</button>
+    <button onclick="pauseVideo()" type="button" class="button is-primary">Pause</button>
+  </section>
   </body>
+</section>
+
 </html>
+
+
