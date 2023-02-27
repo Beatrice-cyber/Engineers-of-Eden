@@ -1,6 +1,7 @@
 var videoPoses;
 var webcamPoses;
 
+
 var videoPosesArr = new Array();
 var webcamPosesArr = new Array();
 var normalisedVideoPosesArr = new Array();
@@ -8,32 +9,35 @@ var normalisedWebcamPosesArr = new Array();
 
 var similarityScore;
 
-var similarityThreshold = 0.13;
+var similarityThreshold = 0.2;
 
 var even, odd;
 
 function analyse() {
+
+    // console.log("called analysekandfiubdjbsfojb");
+
     // if (videoPoses[0] == undefined || webcamPoses[0] == undefined) {
-    //     console.debug("RETURNEDDDD");
+    //     console.log("RETURNEDDDD");
     //     return;
     // }
 
     if (videoPoses[0].length == 0 || webcamPoses[0].length == 0) {
-        console.debug("RETURNEDDDD");
+        console.log("RETURNEDDDD");
         return;
     }
 
-    // console.debug(videoPoses[0][0].pose.keypoints[16].position.x);
-    // console.debug(webcamPoses[0][0].pose.keypoints[16].position.y);
-    // console.debug(videoPoses);
-    // console.debug(webcamPoses);
+    // console.log(videoPoses[0][0].pose.keypoints[16].position.x);
+    // console.log(webcamPoses[0][0].pose.keypoints[16].position.y);
+    // console.log(videoPoses);
+    // console.log(webcamPoses);
 
 
     for (let i = 0; i < 17; i++) {
         even = 2 * i, odd = 2 * i + 1;
 
-        // console.debug(videoPoses[0][0].pose.keypoints[16].position.x);
-        // console.debug(webcamPoses[0][0].pose.keypoints[16].position.y);
+        // console.log(videoPoses[0][0].pose.keypoints[16].position.x);
+        // console.log(webcamPoses[0][0].pose.keypoints[16].position.y);
         videoPosesArr[even] = videoPoses[0][0].pose.keypoints[i].position.x;
         videoPosesArr[odd] = videoPoses[0][0].pose.keypoints[i].position.y;
 
@@ -42,12 +46,12 @@ function analyse() {
     }
     normalisedVideoPosesArr = l2normalisation(rescale(videoPosesArr));
     normalisedWebcamPosesArr = l2normalisation(rescale(webcamPosesArr));
-    console.debug(normalisedVideoPosesArr);
-    console.debug(normalisedWebcamPosesArr);
+    console.log(normalisedVideoPosesArr);
+    console.log(normalisedWebcamPosesArr);
 
     similarityScore = cosineDistanceMatching(normalisedVideoPosesArr, normalisedWebcamPosesArr);
 
-    console.debug(similarityScore);
+    console.log(similarityScore);
 
     if (similarityScore < similarityThreshold)
     {
@@ -69,9 +73,16 @@ function analyse() {
         console.log("MATCH");
         console.log("MATCH");
         console.log("MATCH");
+        document.getElementById("match").innerHTML = "MATCHED";
+        document.getElementById("match").style.color="green";
+        
+    }
+    else {
+        document.getElementById("match").innerHTML = "NOT QUITE";
+        document.getElementById("match").style.color="red";
     }
 
-    console.debug(Date.now());
+    console.log(Date.now());
 }
 
 function cosinesim(A,B){
