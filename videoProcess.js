@@ -4,4 +4,9 @@ var myVideo = document.getElementById("myVid");
   } 
   function pauseVideo() { 
       myVideo.pause(); 
+      
   }
+  function stopVideo() {
+        myVideo.stop();
+  }
+  

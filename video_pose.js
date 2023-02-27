@@ -11,6 +11,11 @@ function pauseVideo() {
   video.pause();
 }
 
+function stopVideo() {
+  video.stop();
+  poseNet.removeListener('pose', gotPoses);
+}
+
 function setup() {
   createCanvas(800, 800);
 
