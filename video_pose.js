@@ -4,7 +4,12 @@ let pose;
 let skeleton;
 
 function playVideo() {
-  video.play();
+  setup()
+   setImmediate(() => { 
+    video.play();
+    });  
+    
+  
 }
 
 function pauseVideo() {
