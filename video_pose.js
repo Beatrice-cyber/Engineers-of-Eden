@@ -1,5 +1,22 @@
 // import { addDataToDatabase } from "./data/addTensor";
 
+function deleteTable() {
+  var request = indexedDB.open("TensorsDatabase", 2);
+
+  request.onsuccess = function () {
+    var db = event.target.result;
+
+    // Use a transaction to delete the object store
+    var transaction = db.transaction("tensors", "readwrite");
+    var objectStore = transaction.objectStore("tensors");
+    objectStore.clear();
+
+    // Once the transaction is complete, the table will be deleted
+    transaction.oncomplete = function (event) {
+      db.deleteObjectStore("myTable");
+    };
+  };
+}
 function addDataToDatabase(data) {
   let request = indexedDB.open("TensorsDatabase", 2);
 
@@ -41,14 +58,10 @@ function pauseVideo() {
   video.pause();
 }
 
-function stopVideo() {
-  video.stop();
-  poseNet.removeListener('pose', gotPoses);
-}
-
 function setup() {
   createCanvas(800, 800);
 
+  deleteTable();
   text("Click on the buttons below to" + " play/pause the video", 20, 20);
   video = createVideo("short_clip.mp4");
   video.hide();

@@ -22,7 +22,6 @@ request.onupgradeneeded = function () {
 
   //2
   const tensorStore = db.createObjectStore("tensors", { autoIncrement: true });
-
   //3
   tensorStore.createIndex("keypoints_axis", ["axis_changed"], {
     unique: false,
