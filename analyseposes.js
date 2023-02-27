@@ -9,7 +9,7 @@ var normalisedWebcamPosesArr = new Array();
 
 var similarityScore;
 
-var similarityThreshold = 0.2;
+var similarityThreshold = 0.17;
 
 var even, odd;
 
