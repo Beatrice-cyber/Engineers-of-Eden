@@ -51,7 +51,7 @@ function setup() {
 function gotPoses(poses) {
   // console.log(poses);
   console.log("video poses");
-  videoPoses = poses;
+  videoPoses = [poses, Date.now()];
 //   analyse(poses);
   if (poses.length > 0) {
     pose = poses[0].pose;
@@ -62,7 +62,7 @@ function gotPoses(poses) {
 function gotWebcamPoses(poses) {
     // console.log(poses);
     console.log("webcam poses");
-    webcamPoses = poses;
+    webcamPoses = [poses, Date.now()];
     analyse();
     if (poses.length > 0) {
       pose = poses[0].pose;
