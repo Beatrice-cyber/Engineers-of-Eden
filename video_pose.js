@@ -1,3 +1,33 @@
+// import { addDataToDatabase } from "./data/addTensor";
+
+function addDataToDatabase(data) {
+  let request = indexedDB.open("TensorsDatabase", 2);
+
+  request.onsuccess = function () {
+    console.log(data);
+
+    let db = event.target.result;
+    let transaction = db.transaction("tensors", "readwrite");
+    let objectStore = transaction.objectStore("tensors");
+    let putRequest = objectStore.add(data);
+
+    putRequest.onsuccess = function (event) {
+      console.log("Data added to the database");
+    };
+
+    putRequest.onerror = function (event) {
+      console.log("Error adding data to the database");
+    };
+
+    transaction.oncomplete = function (event) {
+      console.log("Transaction completed");
+    };
+  };
+
+  request.onerror = function (event) {
+    console.log("Error opening database");
+  };
+}
 let video;
 let poseNet;
 let pose;
@@ -38,9 +68,17 @@ function setup() {
 }
 
 function gotPoses(poses) {
-  console.log(poses);
   if (poses.length > 0) {
     pose = poses[0].pose;
+    const positions1 = [];
+
+    for (let i = 0; i < pose.keypoints.length; i++) {
+      const values = pose.keypoints[i];
+      const position = values.position;
+      positions1.push(position);
+    }
+
+    addDataToDatabase(positions1);
     skeleton = poses[0].skeleton;
   }
 }
