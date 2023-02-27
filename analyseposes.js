@@ -78,7 +78,7 @@ function analyse() {
         
     }
     else {
-        document.getElementById("match").innerHTML = "NOT QUITE";
+        document.getElementById("match").innerHTML = "not quite";
         document.getElementById("match").style.color="red";
     }
 
